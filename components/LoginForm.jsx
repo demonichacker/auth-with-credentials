@@ -9,13 +9,13 @@ export default function LoginForm() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false) // New loading state
+  const [loading, setLoading] = useState(false)
 
   const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(true) // Start loading
+    setLoading(true)
 
     try {
       const res = await signIn("credentials", {
@@ -26,14 +26,14 @@ export default function LoginForm() {
 
       if (res.error) {
         setError("Invalid Credentials")
-        setLoading(false) // Stop loading on error
+        setLoading(false)
         return
       }
 
       router.replace("dashboard")
     } catch (error) {
       console.log(error)
-      setLoading(false) // Stop loading on error
+      setLoading(false)
     }
   }
 
@@ -57,23 +57,26 @@ export default function LoginForm() {
           />
           <button
             className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold cursor-pointer px-4 py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
-            disabled={loading} // Disable button while loading
+            disabled={loading}
           >
             {loading ? (
-              <div className="loader border-t-2 border-white border-solid rounded-full w-4 h-4 animate-spin"></div> // Spinner
+              <div className="loader border-t-2 border-white border-solid rounded-full w-4 h-4 animate-spin"></div>
             ) : (
               "Login"
             )}
           </button>
           {error && (
-            <div className="bg-red-500 text-white w-fit text-sm py-1 px-2 rounded-md mt-2 animate-pulse">{error}</div>
+            <div className="bg-red-500 text-white w-fit text-sm py-1 px-2 rounded-md mt-2 animate-pulse">
+              {error}
+            </div>
           )}
 
           <Link
             className="text-xs mt-2 text-right text-gray-300 hover:text-yellow-400 transition-colors"
             href={"/register"}
           >
-            Don't have an account? <span className="underline text-yellow-400">Register</span>
+            {"Don't have an account? "}
+            <span className="underline text-yellow-400">Register</span>
           </Link>
         </form>
       </div>
